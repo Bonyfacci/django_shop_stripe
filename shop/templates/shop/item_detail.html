@@ -1,0 +1,57 @@
+{% extends 'shop/layouts/layout_base.html' %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+
+{% block content %}
+<section class="container">
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h3 class="fw-normal text-body-emphasis">Отображение товара</h3>
+        <p class="fs-5 text-body-secondary">
+            {{ object.name }}
+        </p>
+    </div>
+</section>
+
+<section class="container">
+    <div class="col-auto">
+        <table class="table table-bordered border-dark table-striped table-hover">
+            <thead>
+            <tr>
+                <th class="text-center" scope="col">Наименование</th>
+                <th class="text-center" scope="col">Описание</th>
+                <th class="text-center" scope="col">Цена</th>
+
+                <th class="text-center" scope="col">Действие</th>
+            </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td class="text-center" scope="row">{{ object.name }}</td>
+                    <td class="text-center" scope="row">{{ object.description }}</td>
+                    <td class="text-center" scope="row">{{ object.price }} рублей</td>
+                    <td class="text-center" scope="row">
+                        <a class="btn btn-sm btn-success"
+                           href="{% url 'shop:buy_stripe' object.pk %}">
+                            Купить
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock %}
+
+
+{% block element %}
+
+
+{% endblock %}
+
+{% block blog %}
+
+
+{% endblock %}

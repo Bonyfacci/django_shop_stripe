@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     # DjangoRESTFramework
     'rest_framework',
 
+    # Документация
+    'drf_yasg',
+
     # Приложения
     'shop.apps.ShopConfig',
     'users.apps.UsersConfig',
@@ -147,3 +150,6 @@ AUTH_USER_MODEL = 'users.User'
 ADMIN_USERNAME = os.getenv('ADMIN_USERNAME')
 ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
 ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD')
+
+# Stripe
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
