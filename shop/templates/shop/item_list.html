@@ -1,0 +1,85 @@
+{% extends 'shop/layouts/layout_base.html' %}
+
+{% block title %}Каталог валют{% endblock %}
+
+
+{% block content %}
+
+<section class="container">
+    <div class="col-auto">
+        <table class="table table-bordered border-dark table-striped table-hover">
+            <thead>
+            <tr>
+                <th class="text-center" scope="col">Наименование</th>
+                <th class="text-center" scope="col">Описание</th>
+                <th class="text-center" scope="col">Цена</th>
+
+                <th class="text-center" scope="col">Действие</th>
+            </tr>
+            </thead>
+
+            {% if object_list %}
+                <tbody>
+                {% for object in object_list %}
+                <tr>
+                    <th class="text-center" scope="row">{{ object.name }}</th>
+                    <td class="text-center">{{ object.description }}</td>
+                    <td class="text-center">{{ object.price }}</td>
+
+                    <td class="text-center">
+                        <div class="btn-group">
+                            {% if object %}
+                                <a class="btn btn-sm btn-info"
+                                   href="{% url 'shop:item_article' object.pk %}">
+                                    О товаре
+                                </a>
+                                <a class="btn btn-sm btn-warning"
+                                   href="{% url 'shop:item_edit' object.pk %}">
+                                    Редактировать
+                                </a>
+                                <a class="btn btn-sm btn-success"
+                                   href="{% url 'shop:buy_stripe' object.pk %}">
+                                    Купить
+                                </a>
+                            {% else %}
+                                <p>Действия недоступны</p>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            {% endif %}
+        </table>
+    </div>
+</section>
+
+{% endblock %}
+
+
+{% block element %}
+
+<section class="container">
+    <div class="row text-center">
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Создать товар</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row d-grid gap-2 d-md-flex justify-content-md-center text-center">
+                        <a href="{% url 'shop:item_create' %}"
+                           class="btn btn-lg btn-block btn-outline-success col-6">Создать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block blog %}
+
+
+{% endblock %}
