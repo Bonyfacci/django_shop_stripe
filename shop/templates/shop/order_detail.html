@@ -1,0 +1,69 @@
+{% extends 'shop/layouts/layout_base.html' %}
+
+{% block title %}{{ object.id }}{% endblock %}
+
+
+{% block content %}
+<section class="container">
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h3 class="fw-normal text-body-emphasis">Отображение заказа</h3>
+        <p class="fs-5 text-body-secondary">
+            {{ object.id }}
+        </p>
+    </div>
+</section>
+
+<section class="container">
+    <div class="col-auto">
+        <table class="table table-bordered border-dark table-striped table-hover">
+            <thead>
+            <tr>
+                <th class="text-center" scope="col">id Заказа</th>
+                <th class="text-center" scope="col">Список товаров</th>
+                <th class="text-center" scope="col">Цена товаров</th>
+                <th class="text-center" scope="col">Скидка, %</th>
+                <th class="text-center" scope="col">Цена товаров со скидкой</th>
+                <th class="text-center" scope="col">Налог, %</th>
+                <th class="text-center" scope="col">Цена товаров со скидкой и с налогом</th>
+
+                <th class="text-center" scope="col">Действие</th>
+            </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th class="text-center" scope="row">{{ object.id }}</th>
+                    <td class="text-center">
+                        {% for item in object.items.all %}
+                        {{ item.name }}<br>
+                        {% endfor %}
+                    </td>
+                    <td class="text-center">{{ object.items_cost }}</td>
+                    <td class="text-center">{{ object.discount }}</td>
+                    <td class="text-center">{{ object.discount_cost }}</td>
+                    <td class="text-center">{{ object.tax }}</td>
+                    <td class="text-center">{{ object.tax_cost }}</td>
+                    <td class="text-center">
+                        <a class="btn btn-sm btn-success"
+                           href="{% url 'shop:buy_order_stripe' object.pk %}">
+                            Купить
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock %}
+
+
+{% block element %}
+
+
+{% endblock %}
+
+{% block blog %}
+
+
+{% endblock %}
