@@ -2,7 +2,7 @@ from django.urls import path
 
 from shop.apps import ShopConfig
 from shop.views.views import home, ItemListView, ItemCreateView, ItemUpdateView, ItemDeleteView, ItemDetailView, \
-    StripeView
+    OrderListView, OrderCreateView, OrderDetailView, OrderUpdateView, ItemStripeView, OrderStripeView
 from shop.views.views_api import ItemListAPIView, ItemCreateAPIView, ItemUpdateAPIView, ItemDeleteAPIView, \
     ItemDetailAPIView
 
@@ -25,8 +25,15 @@ urlpatterns = [
     path('api/item/delete/<int:pk>/', ItemDeleteAPIView.as_view(), name='item-delete'),
     path('api/item/<int:pk>/', ItemDetailAPIView.as_view(), name='item-article'),
 
+    # Order
+    path('orders/', OrderListView.as_view(), name='order_list'),
+    path('order/create/', OrderCreateView.as_view(), name='order_create'),
+    path('order/edit/<int:pk>/', OrderUpdateView.as_view(), name='order_edit'),
+    path('order/<int:pk>/', OrderDetailView.as_view(), name='order_article'),
+
     # Stripe
-    path('buy/<int:pk>/', StripeView.as_view(), name='buy_stripe'),
+    path('buy/<int:pk>/', ItemStripeView.as_view(), name='buy_item_stripe'),
+    path('buy/order/<int:pk>/', OrderStripeView.as_view(), name='buy_order_stripe'),
 
 
 ]
