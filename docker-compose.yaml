@@ -1,11 +1,6 @@
 version: '3'
 
 services:
-  redis:
-    image: redis
-    container_name: redis
-    ports:
-      - "6379:6379"
 
   db:
     image: postgres
@@ -30,7 +25,6 @@ services:
     tty: true
     command: sh -c "python3 manage.py migrate && 
                     python3 manage.py csu && 
-                    python3 manage.py fill_db && 
                     python3 manage.py runserver 0.0.0.0:8000"
     ports:
       - '8000:8000'
@@ -39,27 +33,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-
-  celery:
-    build: .
-    tty: true
-    command: celery -A config worker -l INFO
-    volumes:
-      - .:/app
-    depends_on:
-      - redis
-      - app
-
-  celery_beat:
-    build: .
-    tty: true
-    command: celery -A config beat -l INFO -S django
-    volumes:
-      - .:/app
-    depends_on:
-      - celery
-      - redis
-      - app
 
 volumes:
   pg_data:

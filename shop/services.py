@@ -10,10 +10,10 @@ def create_a_payment(item, url_path):
         line_items=[
             {
                 'price_data': {
-                    'currency': "usd",
+                    'currency': item.currency,
                     'product_data': {
-                        'name': item.name,
-                        'description': item.description,
+                        'name': f'Товар: {item.name}',
+                        'description': f'Описание товара: {item.description}',
                     },
                     'unit_amount': int(item.price * 100),
                 },
@@ -26,3 +26,15 @@ def create_a_payment(item, url_path):
     )
     return session.url
 
+
+def create_a_payment_intent(order):
+    stripe.api_key = STRIPE_SECRET_KEY
+    intent = stripe.PaymentIntent.create(
+        amount=int(float(order.tax_cost) * 100),
+        currency='rub',
+        description=f'Order: {order.id}, Total cost: {int(float(order.tax_cost) * 100)} RUB',
+    )
+    return {
+        'clientSecret': intent['client_secret'],
+        'description': intent['description'],
+    }
