@@ -2,8 +2,6 @@
 
 ### Стек технологий:
 
-<img align="right" alt="PNG" height="200px" src="https://newsrus.su/catalogs/samoregulirovanie/images/1453788241.png" />
-
  - ![alt text](https://img.shields.io/badge/Python-3.11.5-grey?style=plastic&logo=python&logoColor=white&labelColor=%233776AB)
 
  - ![alt text](https://img.shields.io/badge/Django-5.0.2-grey?style=plastic&logo=django&logoColor=white&labelColor=%23092E20)
